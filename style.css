@@ -17,18 +17,18 @@ header {
   justify-content: space-between;
   align-items: end;
   background-color: #f95959;
-  padding: 1.2rem 3rem;
+  padding: 1.2rem 2rem;
 }
 
 .buttons {
   border: none;
   border-radius: 25px;
   padding: 0.5rem 0.7rem;
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 
 main {
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
 }
 
 #list-add {
@@ -53,5 +53,5 @@ main {
   height: 6.25rem;
   border: 0;
   padding: 0px 10px;
-  font-size: 1.25rem;
+  font-size: ;
 }
