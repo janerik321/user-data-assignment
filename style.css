@@ -6,6 +6,7 @@
 
 :root {
   /* font-size: 16px; */
+  /* color: rgba(0, 0, 0, 80%); */
 }
 
 h1 {
@@ -28,7 +29,7 @@ header {
 }
 
 main {
-  padding: 1rem 2rem;
+  /* padding: 1rem 2rem; */
 }
 
 #list-add {
@@ -36,22 +37,57 @@ main {
   border: 1px solid lightgray;
   border-radius: 25px;
   overflow: hidden;
+  margin: 1rem 2rem;
+  /* padding: 0 0rem; */
 }
-
 #user-input {
   width: 100%;
   border: none;
   padding: 0px 10px;
 }
+#add-button {
+  color: white;
+  background-color: green;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 3rem;
+}
 
 #list {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid lightgray;
+  /* padding: 1rem 0; */
 }
 
 #list input {
-  height: 6.25rem;
-  border: 0;
-  padding: 0px 10px;
-  font-size: ;
+  height: 4rem;
+  /* border: */
+  padding: 0 2rem;
+  font-size: 1rem;
+  border: none;
+  border-top: 1px solid lightgray;
+}
+
+#recipe-area {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 2rem;
+  gap: 1rem;
+}
+
+#ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#add-ingredients-button {
+  border-radius: 50%;
+  border: none;
+  font-size: 1.5rem;
+  height: 1.7rem;
+  width: 1.7rem;
+  background-color: green;
+  color: white;
+  text-align: center;
 }
