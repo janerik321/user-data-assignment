@@ -41,4 +41,17 @@ main {
 #user-input {
   width: 100%;
   border: none;
+  padding: 0px 10px;
+}
+
+#list {
+  display: flex;
+  flex-direction: column;
+}
+
+#list input {
+  height: 6.25rem;
+  border: 0;
+  padding: 0px 10px;
+  font-size: 1.25rem;
 }
