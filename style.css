@@ -29,7 +29,7 @@ header {
 }
 
 main {
-  /* padding: 1rem 2rem; */
+  padding: 1rem 2rem;
 }
 
 #list-add {
@@ -83,11 +83,17 @@ main {
 }
 #add-ingredients-button {
   border-radius: 50%;
-  border: none;
-  font-size: 1.5rem;
-  height: 1.7rem;
-  width: 1.7rem;
+  height: 2rem;
+  width: 2rem;
   background-color: green;
   color: white;
   text-align: center;
+}
+
+#recipe-page {
+  /* padding: 1.2rem 2rem; */
+}
+
+#recipe-ingredients ul {
+  padding: 1em;
 }

@@ -16,11 +16,56 @@
       </div>
     </header>
     <main id="main">
-      <form id="list-add">
-        <input type="text" name="user-input" id="user-input" />
-        <input type="submit" value="+" id="add-button" class="buttons" />
-      </form>
-      <div id="list"></div>
+      <!-- Shopping list page -->
+      <div id="shopping-list-page">
+        <form id="shopping-list-add">
+          <input
+            type="text"
+            name="shopping-list-input"
+            id="shopping-list-input"
+          />
+          <input
+            type="submit"
+            value="+"
+            id="add-shopping-list-button"
+            class="buttons"
+          />
+        </form>
+        <div id="shopping-list"></div>
+      </div>
+      <!-- Recipe list page -->
+      <div id="recipe-list-page">
+        <form id="recipe-list-add">
+          <input type="text" name="recipe-list-input" id="recipe-list-input" />
+          <input
+            type="submit"
+            value="+"
+            id="recipe-list-add-button"
+            class="buttons"
+          />
+        </form>
+        <div id="recipe-list"></div>
+      </div>
+      <!-- Recipe page -->
+      <div id="recipe-page">
+        <h2 id="recipe-name">Spaghetti Supreme</h2>
+        <div id="recipe-ingredients">
+          <h3>Ingredients</h3>
+          <div id="ingredient-list"></div>
+          <form id="ingredient-add">
+            <input type="text" name="ingredient-input" id="ingredient-input" />
+            <input
+              type="submit"
+              value="+"
+              id="ingredient-add-button"
+              class="buttons"
+            />
+          </form>
+        </div>
+        <div id="recipe-instructions">
+          <p></p>
+        </div>
+      </div>
     </main>
   </body>
 </html>
