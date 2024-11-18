@@ -37,13 +37,27 @@ const recipeName = document.querySelector("#recipe-name");
 const ingredientAdd = document.querySelector("#ingredient-add");
 const ingredientInput = document.querySelector("#ingredient-input");
 const ingredientList = document.querySelector("#ingredient-list");
+const recipeInstructions = document.querySelector("#recipe-instructions");
+const instructionsArea = document.querySelector("#instructions-area");
+const instructionsInput = document.querySelector("#instructions-input");
 
+const consoleLogShoppingListArray = document.querySelector(
+  "#console-log-shopping-list-array"
+);
+const consoleLogRecipeListArray = document.querySelector(
+  "#console-log-recipe-list-array"
+);
 // Two arrays. One for the shopping list and one for the recipes. The recipes array will contain recipe names and ingredients
 let shoppingListArray = [];
 let recipesArray = [];
 
 let displayPage = "shopping list";
 let activeRecipe = 0;
+
+displayPage = "recipe list";
+recipePage.style.display = "none";
+shoppingListPage.style.display = "none";
+recipeListPage.style.display = "flex";
 
 // shoppingListPage.style.display = "none";
 
@@ -52,9 +66,7 @@ shoppingListAdd.addEventListener("submit", (e) => {
   e.preventDefault();
   const listData = new FormData(shoppingListAdd);
 
-  shoppingListArray.push({
-    item: listData.get("shopping-list-input"),
-  });
+  shoppingListArray.push(listData.get("shopping-list-input"));
 
   shoppingListInput.value = "";
   displayPage = "shopping list";
@@ -80,9 +92,9 @@ ingredientAdd.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log(activeRecipe);
   const listData = new FormData(ingredientAdd);
-  if (!recipesArray[activeRecipe].ingredients) {
-    recipesArray[activeRecipe].ingredients = [];
-  }
+  //   if (!recipesArray[activeRecipe].ingredients) {
+  //     recipesArray[activeRecipe].ingredients = [];
+  //   }
 
   /* 
   recipesArray = [
@@ -93,14 +105,22 @@ ingredientAdd.addEventListener("submit", (e) => {
   ]
   */
 
-  recipesArray[activeRecipe].ingredients.push({
-    ingredients: listData.get("ingredient-input"),
-  });
-  console.log(recipesArray);
+  recipesArray[activeRecipe].ingredients.push(listData.get("ingredient-input"));
+  //   console.log(recipesArray);
   ingredientInput.value = "";
   displayPage = "recipe";
   buildList();
   //   console.log(displayPage);
+});
+
+instructionsArea.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const listData = new FormData(instructionsArea);
+  if (!recipesArray[activeRecipe].instructions) {
+    recipesArray[activeRecipe].instructions = [];
+  }
+  recipesArray[activeRecipe].instructions = listData.get("instructions-input");
+  //   console.log(recipesArray);
 });
 
 // Clear list function
@@ -114,6 +134,7 @@ const removeList = () => {
   while (ingredientList.firstChild) {
     ingredientList.firstChild.remove();
   }
+  //   instructionsArea.remove();
 };
 
 const buildList = () => {
@@ -121,38 +142,57 @@ const buildList = () => {
   if (displayPage === "shopping list") {
     shoppingListArray.forEach((e, i) => {
       const item = document.createElement("input");
-      item.value = e.item;
+      item.value = e;
       shoppingList.prepend(item);
     });
   } else if (displayPage === "recipe list") {
     recipesArray.forEach((e, i) => {
       const name = document.createElement("input");
+      const addToShoppingListButton = document.createElement("button");
 
       name.value = e.name;
-      recipeList.prepend(name);
+      addToShoppingListButton.textContent = "To shopping list";
+      recipeList.prepend(name, addToShoppingListButton);
 
       name.addEventListener("click", () => {
-        console.log(`go to ${e.name} recipe`);
+        // console.log(`go to ${e.name} recipe`);
 
         activeRecipe = i;
         recipeName.textContent = e.name;
+        if (!recipesArray[activeRecipe].ingredients) {
+          recipesArray[activeRecipe].ingredients = [];
+        }
+
+        removeList();
         displayPage = "recipe";
 
         shoppingListPage.style.display = "none";
         recipeListPage.style.display = "none";
         recipePage.style.display = "flex";
         // console.log(activeRecipe);
+        buildList();
         console.log(displayPage);
+      });
+      //   Transfer ingredients from recipesArray to shoppingListArray
+      addToShoppingListButton.addEventListener("click", () => {
+        recipesArray[i].ingredients.forEach((e) => {
+          shoppingListArray.push(e);
+        });
       });
     });
   } else if (displayPage === "recipe") {
     // Loop over the active recipe's ingredient list
     recipesArray[activeRecipe].ingredients.forEach((e, i) => {
       const ingredient = document.createElement("input");
-      ingredient.value = e.ingredients;
+      ingredient.value = e;
       ingredientList.append(ingredient);
-      console.log(e.ingredients);
+
+      console.log(e);
     });
+    if (!recipesArray[activeRecipe].instructions) {
+      recipesArray[activeRecipe].instructions = null;
+    }
+    instructionsInput.value = recipesArray[activeRecipe].instructions;
   }
 };
 
@@ -162,7 +202,9 @@ recipesButton.addEventListener("click", () => {
   recipePage.style.display = "none";
   shoppingListPage.style.display = "none";
   recipeListPage.style.display = "flex";
-  //   recipeListAdd.style.display = "flex";
+
+  console.log("recipe list");
+  buildList();
 });
 
 shoppingListButton.addEventListener("click", () => {
@@ -171,6 +213,14 @@ shoppingListButton.addEventListener("click", () => {
   recipeListPage.style.display = "none";
   recipePage.style.display = "none";
   shoppingListPage.style.display = "flex";
-  //   recipeListAdd.style.display = "flex";
+
+  console.log("shopping list");
   buildList();
+});
+
+consoleLogRecipeListArray.addEventListener("click", () => {
+  console.log(recipesArray);
+});
+consoleLogShoppingListArray.addEventListener("click", () => {
+  console.log(shoppingListArray);
 });

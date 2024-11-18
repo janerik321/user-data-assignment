@@ -112,3 +112,21 @@ main {
   display: flex;
   flex-direction: column;
 }
+
+#instructions-input {
+  height: 100px;
+}
+
+#console-log-shopping-list-array {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  padding: 10px;
+}
+
+#console-log-recipe-list-array {
+  position: absolute;
+  bottom: 10px;
+  left: 200px;
+  padding: 10px;
+}

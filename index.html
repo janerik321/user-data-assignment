@@ -23,6 +23,7 @@
             type="text"
             name="shopping-list-input"
             id="shopping-list-input"
+            placeholder="Add to shopping list"
           />
           <input
             type="submit"
@@ -36,7 +37,12 @@
       <!-- Recipe list page -->
       <div id="recipe-list-page">
         <form id="recipe-list-add">
-          <input type="text" name="recipe-list-input" id="recipe-list-input" />
+          <input
+            type="text"
+            name="recipe-list-input"
+            id="recipe-list-input"
+            placeholder="Add recipe"
+          />
           <input
             type="submit"
             value="+"
@@ -53,7 +59,12 @@
           <h3>Ingredients</h3>
           <div id="ingredient-list"></div>
           <form id="ingredient-add">
-            <input type="text" name="ingredient-input" id="ingredient-input" />
+            <input
+              type="text"
+              name="ingredient-input"
+              id="ingredient-input"
+              placeholder="Add ingredient"
+            />
             <input
               type="submit"
               value="+"
@@ -64,9 +75,19 @@
         </div>
         <div id="recipe-instructions">
           <h3>Instructions</h3>
-          <p></p>
+          <form id="instructions-area">
+            <input
+              type="text"
+              name="instructions-input"
+              id="instructions-input"
+              placeholder="Enter instructions here"
+            />
+            <input type="submit" value="Save" id="instructions-save-button" />
+          </form>
         </div>
       </div>
+      <button id="console-log-shopping-list-array">Shopping list array</button>
+      <button id="console-log-recipe-list-array">Recipe list array</button>
     </main>
   </body>
 </html>
