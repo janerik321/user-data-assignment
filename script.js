@@ -143,6 +143,12 @@ const buildList = () => {
     shoppingListArray.forEach((e, i) => {
       const item = document.createElement("input");
       item.value = e;
+      item.addEventListener("click", () => {
+        shoppingListArray.splice(i, 1);
+        item.remove();
+        console.log(i);
+        // Fortsett her...
+      });
       shoppingList.prepend(item);
     });
   } else if (displayPage === "recipe list") {
@@ -185,10 +191,17 @@ const buildList = () => {
     recipesArray[activeRecipe].ingredients.forEach((e, i) => {
       const ingredient = document.createElement("input");
       ingredient.value = e;
+
       ingredientList.append(ingredient);
+      //   ingredient.addEventListener("click", () => {
+      //     ingredient.readOnly = false;
+      //     ingredient.focus();
+      //     console.log("123");
+      //   });
 
       console.log(e);
     });
+
     if (!recipesArray[activeRecipe].instructions) {
       recipesArray[activeRecipe].instructions = null;
     }
