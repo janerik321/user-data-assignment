@@ -97,3 +97,18 @@ main {
 #recipe-ingredients ul {
   padding: 1em;
 }
+
+#shopping-list-page {
+  display: flex;
+  flex-direction: column;
+}
+
+#recipe-list-page {
+  display: flex;
+  flex-direction: column;
+}
+
+#recipe-page {
+  display: flex;
+  flex-direction: column;
+}
