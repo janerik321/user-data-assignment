@@ -34,6 +34,7 @@ const recipeList = document.querySelector("#recipe-list");
 // Recipes page
 const recipePage = document.querySelector("#recipe-page");
 const recipeName = document.querySelector("#recipe-name");
+const deleteButton = document.querySelector("#delete-button");
 const ingredientAdd = document.querySelector("#ingredient-add");
 const ingredientInput = document.querySelector("#ingredient-input");
 const ingredientList = document.querySelector("#ingredient-list");
@@ -146,8 +147,7 @@ const buildList = () => {
       item.addEventListener("click", () => {
         shoppingListArray.splice(i, 1);
         item.remove();
-        console.log(i);
-        // Fortsett her...
+        buildList(); //?
       });
       shoppingList.prepend(item);
     });
@@ -155,10 +155,14 @@ const buildList = () => {
     recipesArray.forEach((e, i) => {
       const name = document.createElement("input");
       const addToShoppingListButton = document.createElement("button");
+      const nameAndButtonContainer = document.createElement("div");
 
       name.value = e.name;
-      addToShoppingListButton.textContent = "To shopping list";
-      recipeList.prepend(name, addToShoppingListButton);
+      addToShoppingListButton.classList.add("add-to-shopping-list-button");
+      nameAndButtonContainer.classList.add("name-and-button-container");
+
+      nameAndButtonContainer.append(name, addToShoppingListButton);
+      recipeList.prepend(nameAndButtonContainer);
 
       name.addEventListener("click", () => {
         // console.log(`go to ${e.name} recipe`);
@@ -192,6 +196,11 @@ const buildList = () => {
       const ingredient = document.createElement("input");
       ingredient.value = e;
 
+      ingredient.addEventListener("click", () => {
+        recipesArray[activeRecipe].ingredients.splice(i, 1);
+        ingredient.remove();
+      });
+
       ingredientList.append(ingredient);
       //   ingredient.addEventListener("click", () => {
       //     ingredient.readOnly = false;
@@ -199,7 +208,7 @@ const buildList = () => {
       //     console.log("123");
       //   });
 
-      console.log(e);
+      //   console.log(e);
     });
 
     if (!recipesArray[activeRecipe].instructions) {
@@ -231,9 +240,24 @@ shoppingListButton.addEventListener("click", () => {
   buildList();
 });
 
-consoleLogRecipeListArray.addEventListener("click", () => {
+deleteButton.addEventListener("click", () => {
+  console.log(activeRecipe);
+  recipesArray.splice(activeRecipe, 1);
+  removeList();
+  displayPage = "recipe list";
+  recipePage.style.display = "none";
+  shoppingListPage.style.display = "none";
+  recipeListPage.style.display = "flex";
+
+  buildList();
+});
+
+// Array checker buttons
+
+/* consoleLogRecipeListArray.addEventListener("click", () => {
   console.log(recipesArray);
 });
 consoleLogShoppingListArray.addEventListener("click", () => {
   console.log(shoppingListArray);
 });
+ */
