@@ -201,6 +201,7 @@ const buildList = () => {
         ingredient.remove();
       });
 
+      //   "●"
       ingredientList.append(ingredient);
       //   ingredient.addEventListener("click", () => {
       //     ingredient.readOnly = false;
