@@ -8,92 +8,96 @@
     <title>Document</title>
   </head>
   <body>
-    <header>
-      <h1>Reciplist</h1>
-      <div>
-        <button id="shopping-list-button" class="buttons">Shopping List</button>
-        <button id="recipes-button" class="buttons">Recipes</button>
-      </div>
-    </header>
-    <main id="main">
-      <!-- Shopping list page -->
-      <div id="shopping-list-page">
-        <form id="shopping-list-add">
-          <input
-            type="text"
-            name="shopping-list-input"
-            id="shopping-list-input"
-            placeholder="Add to shopping list"
-          />
-          <input
-            type="submit"
-            value="+"
-            id="add-shopping-list-button"
-            class="buttons"
-          />
-        </form>
-        <hr />
-        <div id="shopping-list"></div>
-      </div>
-      <!-- Recipe list page -->
-      <div id="recipe-list-page">
-        <form id="recipe-list-add">
-          <input
-            type="text"
-            name="recipe-list-input"
-            id="recipe-list-input"
-            placeholder="Add recipe"
-          />
-          <input
-            type="submit"
-            value="+"
-            id="recipe-list-add-button"
-            class="buttons"
-          />
-        </form>
-        <hr />
-        <div id="recipe-list"></div>
-      </div>
-      <!-- Recipe page -->
-      <div id="recipe-page">
-        <div id="name-and-delete-button">
-          <h2 id="recipe-name"></h2>
-          <button id="delete-button">Delete</button>
+    <container>
+      <header>
+        <h1>Reciplist</h1>
+        <div>
+          <button id="shopping-list-button" class="buttons">
+            Shopping List
+          </button>
+          <button id="recipes-button" class="buttons">Recipes</button>
         </div>
-        <hr />
-        <div id="recipe-ingredients">
-          <h3>Ingredients</h3>
-          <div id="ingredient-list"></div>
-          <form id="ingredient-add">
+      </header>
+      <main id="main">
+        <!-- Shopping list page -->
+        <div id="shopping-list-page">
+          <form id="shopping-list-add">
             <input
               type="text"
-              name="ingredient-input"
-              id="ingredient-input"
-              placeholder="Add ingredient"
+              name="shopping-list-input"
+              id="shopping-list-input"
+              placeholder="Add to shopping list"
             />
             <input
               type="submit"
               value="+"
-              id="ingredient-add-button"
+              id="add-shopping-list-button"
               class="buttons"
             />
           </form>
+          <hr />
+          <div id="shopping-list"></div>
         </div>
-        <div id="recipe-instructions">
-          <h3>Instructions</h3>
-          <form id="instructions-area">
-            <textarea
-              name="instructions-input"
-              id="instructions-input"
-              placeholder="Enter instructions here"
-            ></textarea>
-            <input type="submit" value="Save" id="instructions-save-button" />
+        <!-- Recipe list page -->
+        <div id="recipe-list-page">
+          <form id="recipe-list-add">
+            <input
+              type="text"
+              name="recipe-list-input"
+              id="recipe-list-input"
+              placeholder="Add recipe"
+            />
+            <input
+              type="submit"
+              value="+"
+              id="recipe-list-add-button"
+              class="buttons"
+            />
           </form>
+          <hr />
+          <div id="recipe-list"></div>
         </div>
-      </div>
-      <!-- Array checker buttons -->
-      <!-- <button id="console-log-shopping-list-array">Shopping list array</button>
+        <!-- Recipe page -->
+        <div id="recipe-page">
+          <div id="name-and-delete-button">
+            <h2 id="recipe-name"></h2>
+            <button id="delete-button">Delete</button>
+          </div>
+          <hr />
+          <div id="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <div id="ingredient-list"></div>
+            <form id="ingredient-add">
+              <input
+                type="text"
+                name="ingredient-input"
+                id="ingredient-input"
+                placeholder="Add ingredient"
+              />
+              <input
+                type="submit"
+                value="+"
+                id="ingredient-add-button"
+                class="buttons"
+              />
+            </form>
+          </div>
+          <div id="recipe-instructions">
+            <h3>Instructions</h3>
+            <form id="instructions-area">
+              <textarea
+                name="instructions-input"
+                id="instructions-input"
+                placeholder="Enter instructions here"
+              ></textarea>
+              <input type="submit" value="Save" id="instructions-save-button" />
+            </form>
+          </div>
+        </div>
+        <!-- Array checker buttons -->
+        <!-- <button id="console-log-shopping-list-array">Shopping list array</button>
       <button id="console-log-recipe-list-array">Recipe list array</button> -->
-    </main>
+      </main>
+    </container>
   </body>
 </html>

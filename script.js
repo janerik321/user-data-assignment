@@ -1,18 +1,3 @@
-/*
-Separate arrays
-1 for shopping list
-1 for recipe list
-
-const/let recipes = [
-{name: "spaghetti supreme",
-description: "First start with...",
-ingredient1: "spaghetti",
-ingredient2: "tomatoes",
-ingredient3: "olive oil"},]
-
-
-*/
-
 // Header
 const recipesButton = document.querySelector("#recipes-button");
 const shoppingListButton = document.querySelector("#shopping-list-button");
@@ -55,12 +40,27 @@ let recipesArray = [];
 let displayPage = "shopping list";
 let activeRecipe = 0;
 
+function saveToLocal() {
+  localStorage.setItem("shoppingList", JSON.stringify(shoppingListArray));
+  localStorage.setItem("recipes", JSON.stringify(recipesArray));
+}
+
+const storedShoppingList = localStorage.getItem("shoppingList");
+if (storedShoppingList) {
+  shoppingListArray = JSON.parse(storedShoppingList);
+}
+
+const storedRecipes = localStorage.getItem("recipes");
+if (storedRecipes) {
+  recipesArray = JSON.parse(storedRecipes);
+}
+
 displayPage = "recipe list";
 recipePage.style.display = "none";
 shoppingListPage.style.display = "none";
 recipeListPage.style.display = "flex";
 
-// shoppingListPage.style.display = "none";
+buildList();
 
 // Shopping list page
 shoppingListAdd.addEventListener("submit", (e) => {
@@ -70,6 +70,7 @@ shoppingListAdd.addEventListener("submit", (e) => {
   shoppingListArray.push(listData.get("shopping-list-input"));
 
   shoppingListInput.value = "";
+  saveToLocal();
   displayPage = "shopping list";
   buildList();
 });
@@ -83,6 +84,8 @@ recipeListAdd.addEventListener("submit", (e) => {
     name: listData.get("recipe-list-input"),
   });
 
+  saveToLocal();
+
   recipeListInput.value = "";
   displayPage = "recipe list";
   buildList();
@@ -91,27 +94,14 @@ recipeListAdd.addEventListener("submit", (e) => {
 // Recipe page - ingredients
 ingredientAdd.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(activeRecipe);
-  const listData = new FormData(ingredientAdd);
-  //   if (!recipesArray[activeRecipe].ingredients) {
-  //     recipesArray[activeRecipe].ingredients = [];
-  //   }
 
-  /* 
-  recipesArray = [
-  {name: "spaghetti supreme",
-  ingredients: ["pasta", "tomatoes", "olive oil"]},
-  {name: "rice supreme",
-  ingredients: ["rice", "vegetables"]}
-  ]
-  */
+  const listData = new FormData(ingredientAdd);
 
   recipesArray[activeRecipe].ingredients.push(listData.get("ingredient-input"));
-  //   console.log(recipesArray);
+  saveToLocal();
   ingredientInput.value = "";
   displayPage = "recipe";
   buildList();
-  //   console.log(displayPage);
 });
 
 instructionsArea.addEventListener("submit", (e) => {
@@ -121,11 +111,10 @@ instructionsArea.addEventListener("submit", (e) => {
     recipesArray[activeRecipe].instructions = [];
   }
   recipesArray[activeRecipe].instructions = listData.get("instructions-input");
-  //   console.log(recipesArray);
 });
 
 // Clear list function
-const removeList = () => {
+function removeList() {
   while (shoppingList.firstChild) {
     shoppingList.firstChild.remove();
   }
@@ -135,10 +124,10 @@ const removeList = () => {
   while (ingredientList.firstChild) {
     ingredientList.firstChild.remove();
   }
-  //   instructionsArea.remove();
-};
+}
 
-const buildList = () => {
+// Build list function
+function buildList() {
   removeList();
   if (displayPage === "shopping list") {
     shoppingListArray.forEach((e, i) => {
@@ -147,6 +136,7 @@ const buildList = () => {
       item.addEventListener("click", () => {
         shoppingListArray.splice(i, 1);
         item.remove();
+        saveToLocal();
         buildList(); //?
       });
       shoppingList.prepend(item);
@@ -165,8 +155,6 @@ const buildList = () => {
       recipeList.prepend(nameAndButtonContainer);
 
       name.addEventListener("click", () => {
-        // console.log(`go to ${e.name} recipe`);
-
         activeRecipe = i;
         recipeName.textContent = e.name;
         if (!recipesArray[activeRecipe].ingredients) {
@@ -181,12 +169,12 @@ const buildList = () => {
         recipePage.style.display = "flex";
         // console.log(activeRecipe);
         buildList();
-        console.log(displayPage);
       });
       //   Transfer ingredients from recipesArray to shoppingListArray
       addToShoppingListButton.addEventListener("click", () => {
         recipesArray[i].ingredients.forEach((e) => {
           shoppingListArray.push(e);
+          saveToLocal();
         });
       });
     });
@@ -199,17 +187,11 @@ const buildList = () => {
       ingredient.addEventListener("click", () => {
         recipesArray[activeRecipe].ingredients.splice(i, 1);
         ingredient.remove();
+        saveToLocal();
       });
 
       //   "●"
       ingredientList.append(ingredient);
-      //   ingredient.addEventListener("click", () => {
-      //     ingredient.readOnly = false;
-      //     ingredient.focus();
-      //     console.log("123");
-      //   });
-
-      //   console.log(e);
     });
 
     if (!recipesArray[activeRecipe].instructions) {
@@ -217,7 +199,7 @@ const buildList = () => {
     }
     instructionsInput.value = recipesArray[activeRecipe].instructions;
   }
-};
+}
 
 recipesButton.addEventListener("click", () => {
   removeList();
@@ -225,8 +207,6 @@ recipesButton.addEventListener("click", () => {
   recipePage.style.display = "none";
   shoppingListPage.style.display = "none";
   recipeListPage.style.display = "flex";
-
-  console.log("recipe list");
   buildList();
 });
 
@@ -236,8 +216,6 @@ shoppingListButton.addEventListener("click", () => {
   recipeListPage.style.display = "none";
   recipePage.style.display = "none";
   shoppingListPage.style.display = "flex";
-
-  console.log("shopping list");
   buildList();
 });
 
@@ -245,6 +223,7 @@ deleteButton.addEventListener("click", () => {
   console.log(activeRecipe);
   recipesArray.splice(activeRecipe, 1);
   removeList();
+  saveToLocal();
   displayPage = "recipe list";
   recipePage.style.display = "none";
   shoppingListPage.style.display = "none";
