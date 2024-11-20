@@ -55,10 +55,11 @@ if (storedRecipes) {
   recipesArray = JSON.parse(storedRecipes);
 }
 
-displayPage = "recipe list";
+recipesButton.style.backgroundColor = "rgba(255, 255, 255, 60%)";
+shoppingListButton.style.backgroundColor = "rgba(255, 255, 255, 95%)";
 recipePage.style.display = "none";
-shoppingListPage.style.display = "none";
-recipeListPage.style.display = "flex";
+shoppingListPage.style.display = "flex";
+recipeListPage.style.display = "none";
 
 buildList();
 
@@ -88,6 +89,7 @@ recipeListAdd.addEventListener("submit", (e) => {
 
   recipeListInput.value = "";
   displayPage = "recipe list";
+
   buildList();
 });
 
@@ -111,6 +113,7 @@ instructionsArea.addEventListener("submit", (e) => {
     recipesArray[activeRecipe].instructions = [];
   }
   recipesArray[activeRecipe].instructions = listData.get("instructions-input");
+  saveToLocal();
 });
 
 // Clear list function
@@ -149,6 +152,7 @@ function buildList() {
 
       name.value = e.name;
       addToShoppingListButton.classList.add("add-to-shopping-list-button");
+      addToShoppingListButton.classList.add("buttons");
       nameAndButtonContainer.classList.add("name-and-button-container");
 
       nameAndButtonContainer.append(name, addToShoppingListButton);
@@ -163,7 +167,7 @@ function buildList() {
 
         removeList();
         displayPage = "recipe";
-
+        recipesButton.style.backgroundColor = "rgba(255, 255, 255, 75%)";
         shoppingListPage.style.display = "none";
         recipeListPage.style.display = "none";
         recipePage.style.display = "flex";
@@ -182,16 +186,17 @@ function buildList() {
     // Loop over the active recipe's ingredient list
     recipesArray[activeRecipe].ingredients.forEach((e, i) => {
       const ingredient = document.createElement("input");
+      const ingredientDiv = document.createElement("div");
       ingredient.value = e;
 
       ingredient.addEventListener("click", () => {
         recipesArray[activeRecipe].ingredients.splice(i, 1);
-        ingredient.remove();
+        ingredientDiv.remove();
         saveToLocal();
       });
 
-      //   "●"
-      ingredientList.append(ingredient);
+      ingredientDiv.append("-", ingredient);
+      ingredientList.append(ingredientDiv);
     });
 
     if (!recipesArray[activeRecipe].instructions) {
@@ -207,6 +212,8 @@ recipesButton.addEventListener("click", () => {
   recipePage.style.display = "none";
   shoppingListPage.style.display = "none";
   recipeListPage.style.display = "flex";
+  shoppingListButton.style.backgroundColor = "rgba(255, 255, 255, 60%)";
+  recipesButton.style.backgroundColor = "rgba(255, 255, 255, 95%)";
   buildList();
 });
 
@@ -216,6 +223,8 @@ shoppingListButton.addEventListener("click", () => {
   recipeListPage.style.display = "none";
   recipePage.style.display = "none";
   shoppingListPage.style.display = "flex";
+  recipesButton.style.backgroundColor = "rgba(255, 255, 255, 60%)";
+  shoppingListButton.style.backgroundColor = "rgba(255, 255, 255, 95%)";
   buildList();
 });
 

@@ -7,34 +7,27 @@
 :root {
   /* font-size: 16px; */
   /* color: rgba(0, 0, 0, 80%); */
-  /* font-family: ; */
+  /* font-family: "Nunito Sans"; */
 }
 
 h1 {
   font-size: 1.5rem;
+  width: min-content;
 }
 h2 {
   /* margin: 0.2rem 0; */
+}
+
+h1,
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
 }
 
 h3 {
   margin: 0.3rem 0;
   font-size: 1.2rem;
   font-weight: 500;
-}
-header {
-  max-width: 500px;
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  background-color: #f95959;
-  padding: 1.2rem 2rem;
-  /* height: 10%; */
-}
-input {
-  font-size: 1rem;
-  padding: 0.3rem;
-  border: none;
 }
 
 textarea {
@@ -43,8 +36,8 @@ textarea {
 }
 
 button {
-  min-width: 30px;
-  min-height: 30px;
+  min-width: 32px;
+  min-height: 32px;
   border: none;
 }
 .buttons {
@@ -52,15 +45,37 @@ button {
   border-radius: 25px;
   padding: 0.5rem 0.7rem;
   font-size: 1rem;
+  box-shadow: 0px 2px 10px -5px;
 }
 body {
-  /* height: 100vh; */
-  /* width: 100vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+
   background-color: lightgray;
+}
+container {
+  min-width: 375px;
+  min-height: 100vh;
+  background-color: white;
+}
+
+header {
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  background-color: #f95959;
+  /* background-image: url(images/pot-svgrepo-com.svg);
+  background-size: contain;
+  background-repeat: no-repeat; */
+  padding: 1.2rem 2rem;
+  /* height: 10%; */
+}
+input {
+  font-size: 1rem;
+  padding: 0.3rem;
+  border: none;
 }
 main {
   max-width: 500px;
@@ -107,15 +122,18 @@ main {
 
 .name-and-button-container {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
 }
 
 .add-to-shopping-list-button {
   background-image: url(images/shopping-list-svgrepo-com.svg);
   background-repeat: no-repeat;
-  background-size: contain;
-  background-color: white;
+  background-size: 85%;
+  background-position: center;
+  /* background-color: white; */
+  border-radius: 50%;
+  overflow: visible;
 }
 
 #recipe-area {
@@ -192,10 +210,16 @@ main {
 
 #shopping-list-add {
   flex-direction: row;
+  justify-content: space-between;
 }
 
 #recipe-list-page > * {
   gap: 1rem;
+}
+
+#recipe-list-add {
+  display: flex;
+  justify-content: space-between;
 }
 
 #recipe-page {
@@ -211,7 +235,8 @@ main {
 #instructions-input {
   min-height: 100px;
   width: 100%;
-  /* field-sizing: normal; */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
 }
 
 #console-log-shopping-list-array {
@@ -226,4 +251,15 @@ main {
   bottom: 10px;
   left: 200px;
   padding: 10px;
+}
+
+@media screen and (min-width: 500px) {
+  container {
+    min-width: 500px;
+    min-height: 94vh;
+    margin: 3vh 0;
+    box-shadow: 0px 5px 40px -20px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
 }
