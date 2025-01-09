@@ -68,12 +68,14 @@ shoppingListAdd.addEventListener("submit", (e) => {
   e.preventDefault();
   const listData = new FormData(shoppingListAdd);
 
-  shoppingListArray.push(listData.get("shopping-list-input"));
+  if (listData.get("shopping-list-input") !== "") {
+    shoppingListArray.push(listData.get("shopping-list-input"));
 
-  shoppingListInput.value = "";
-  saveToLocal();
-  displayPage = "shopping list";
-  buildList();
+    shoppingListInput.value = "";
+    saveToLocal();
+    displayPage = "shopping list";
+    buildList();
+  }
 });
 
 // Recipe list page
@@ -81,16 +83,18 @@ recipeListAdd.addEventListener("submit", (e) => {
   e.preventDefault();
   const listData = new FormData(recipeListAdd);
 
-  recipesArray.push({
-    name: listData.get("recipe-list-input"),
-  });
+  if (listData.get("recipe-list-input") !== "") {
+    recipesArray.push({
+      name: listData.get("recipe-list-input"),
+    });
 
-  saveToLocal();
+    saveToLocal();
 
-  recipeListInput.value = "";
-  displayPage = "recipe list";
+    recipeListInput.value = "";
+    displayPage = "recipe list";
 
-  buildList();
+    buildList();
+  }
 });
 
 // Recipe page - ingredients
@@ -99,11 +103,15 @@ ingredientAdd.addEventListener("submit", (e) => {
 
   const listData = new FormData(ingredientAdd);
 
-  recipesArray[activeRecipe].ingredients.push(listData.get("ingredient-input"));
-  saveToLocal();
-  ingredientInput.value = "";
-  displayPage = "recipe";
-  buildList();
+  if (listData.get("ingredient-input") !== "") {
+    recipesArray[activeRecipe].ingredients.push(
+      listData.get("ingredient-input")
+    );
+    saveToLocal();
+    ingredientInput.value = "";
+    displayPage = "recipe";
+    buildList();
+  }
 });
 
 instructionsArea.addEventListener("submit", (e) => {
@@ -167,7 +175,7 @@ function buildList() {
 
         removeList();
         displayPage = "recipe";
-        recipesButton.style.backgroundColor = "rgba(255, 255, 255, 75%)";
+        recipesButton.style.backgroundColor = "rgba(255, 255, 255, 60%)";
         shoppingListPage.style.display = "none";
         recipeListPage.style.display = "none";
         recipePage.style.display = "flex";
@@ -243,10 +251,9 @@ deleteButton.addEventListener("click", () => {
 
 // Array checker buttons
 
-/* consoleLogRecipeListArray.addEventListener("click", () => {
+consoleLogRecipeListArray.addEventListener("click", () => {
   console.log(recipesArray);
 });
 consoleLogShoppingListArray.addEventListener("click", () => {
   console.log(shoppingListArray);
 });
- */

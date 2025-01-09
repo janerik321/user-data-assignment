@@ -40,6 +40,11 @@ button {
   min-height: 32px;
   border: none;
 }
+
+/* button:hover {
+  background-color: blue;
+} */
+
 .buttons {
   border: none;
   border-radius: 25px;
@@ -47,6 +52,11 @@ button {
   font-size: 1rem;
   box-shadow: 0px 2px 10px -5px;
 }
+
+/* .buttons:hover {
+  background-color: red;
+} */
+
 body {
   display: flex;
   flex-direction: column;
@@ -226,6 +236,10 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+#ingredient-input {
+  border: 1px solid #ccc;
 }
 
 #instructions-area {
