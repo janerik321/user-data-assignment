@@ -39,6 +39,7 @@ let recipesArray = [];
 
 let displayPage = "shopping list";
 let activeRecipe = 0;
+let displayIngredientDeleteButtons = true;
 
 function saveToLocal() {
   localStorage.setItem("shoppingList", JSON.stringify(shoppingListArray));
@@ -142,27 +143,43 @@ function buildList() {
   removeList();
   if (displayPage === "shopping list") {
     shoppingListArray.forEach((e, i) => {
+      const itemContainer = document.createElement("div");
       const item = document.createElement("input");
+      const itemDeleteButton = document.createElement("button");
+
+      itemContainer.classList.add("shopping-list-item");
+      itemDeleteButton.classList.add("delete-button");
+
       item.value = e;
-      item.addEventListener("click", () => {
+      itemDeleteButton.textContent = "X";
+      itemDeleteButton.addEventListener("click", () => {
         shoppingListArray.splice(i, 1);
         item.remove();
         saveToLocal();
         buildList(); //?
       });
-      shoppingList.prepend(item);
+
+      itemContainer.append(item, itemDeleteButton);
+      shoppingList.prepend(itemContainer);
     });
   } else if (displayPage === "recipe list") {
     recipesArray.forEach((e, i) => {
       const name = document.createElement("input");
       const addToShoppingListButton = document.createElement("button");
+      const addToShoppingListButtonImage = document.createElement("img");
       const nameAndButtonContainer = document.createElement("div");
 
       name.value = e.name;
       addToShoppingListButton.classList.add("add-to-shopping-list-button");
+      addToShoppingListButton.classList.add("add-button");
       addToShoppingListButton.classList.add("buttons");
       nameAndButtonContainer.classList.add("name-and-button-container");
 
+      addToShoppingListButton.textContent = "+";
+      addToShoppingListButtonImage.src =
+        "/images/shopping-list-svgrepo-com.svg";
+
+      addToShoppingListButton.append(addToShoppingListButtonImage);
       nameAndButtonContainer.append(name, addToShoppingListButton);
       recipeList.prepend(nameAndButtonContainer);
 
@@ -194,16 +211,22 @@ function buildList() {
     // Loop over the active recipe's ingredient list
     recipesArray[activeRecipe].ingredients.forEach((e, i) => {
       const ingredient = document.createElement("input");
+      const ingredientRemoveButton = document.createElement("button");
       const ingredientDiv = document.createElement("div");
-      ingredient.value = e;
 
-      ingredient.addEventListener("click", () => {
+      ingredientDiv.classList.add("ingredient-container");
+
+      ingredient.value = "- " + e;
+      ingredientRemoveButton.classList.add("delete-button");
+      ingredientRemoveButton.textContent = "X";
+
+      ingredientRemoveButton.addEventListener("click", () => {
         recipesArray[activeRecipe].ingredients.splice(i, 1);
         ingredientDiv.remove();
         saveToLocal();
       });
 
-      ingredientDiv.append("-", ingredient);
+      ingredientDiv.append(ingredient, ingredientRemoveButton);
       ingredientList.append(ingredientDiv);
     });
 
@@ -248,6 +271,21 @@ deleteButton.addEventListener("click", () => {
 
   buildList();
 });
+
+// ingredientList.addEventListener("click", () => {
+//   const deleteIngredient = ingredientList.querySelectorAll("button");
+//   displayIngredientDeleteButtons = !displayIngredientDeleteButtons;
+
+//   if (!displayIngredientDeleteButtons) {
+//     recipesArray[activeRecipe].ingredients.forEach((e, i) => {
+//       deleteIngredient[i].style.display = "inline-block";
+//     });
+//   } else if (displayIngredientDeleteButtons) {
+//     recipesArray[activeRecipe].ingredients.forEach((e, i) => {
+//       deleteIngredient[i].style.display = "none";
+//     });
+//   }
+// });
 
 // Array checker buttons
 
