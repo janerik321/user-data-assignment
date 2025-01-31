@@ -177,7 +177,7 @@ function buildList() {
 
       addToShoppingListButton.textContent = "+";
       addToShoppingListButtonImage.src =
-        "/images/shopping-list-svgrepo-com.svg";
+        "./images/shopping-list-svgrepo-com.svg";
 
       addToShoppingListButton.append(addToShoppingListButtonImage);
       nameAndButtonContainer.append(name, addToShoppingListButton);
